@@ -3,9 +3,9 @@ before:
   hooks:
     - go mod download
 builds:
-  - main: ./cmd/go-template
-    id: "template-application"
-    binary: "template-application"
+  - main: ./cmd/custom-metrics-exporter
+    id: "custom-metrics-exporter"
+    binary: "custom-metrics-exporter"
     ldflags:
       - -s -w
       - -X 'main.version={{.Version}}'
@@ -26,12 +26,12 @@ archives:
   - id: bin
     format: binary
     builds:
-    - template-application
+    - custom-metrics-exporter
     name_template: "{{ .Binary }}_{{ .Version }}_{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
   - id: tar
     format: tar.gz
     builds:
-    - template-application
+    - custom-metrics-exporter
 
 checksum:
   name_template: 'sha256sums.txt'
@@ -52,8 +52,8 @@ changelog:
 
 nfpms:
 - maintainer: Marco Siebecke <marco@siebecke.se>
-  description: go template repo package
-  homepage: https://github.com/gentoomaniac/go-template
+  description: prometheus exporter for my custom metrics
+  homepage: https://github.com/gentoomaniac/custom-metrics-exporter
   license: MIT
   formats:
   - deb
